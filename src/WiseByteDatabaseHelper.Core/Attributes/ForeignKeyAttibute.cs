@@ -1,4 +1,7 @@
-﻿namespace WiseByteDatabaseHelper.Core.Attributes;
+﻿using System.Linq.Expressions;
+using System.Reflection;
+
+namespace WiseByteDatabaseHelper.Core.Attributes;
 
 [AttributeUsage(AttributeTargets.Property)]
 public class ForeignKeyAttribute : Attribute
@@ -11,4 +14,6 @@ public class ForeignKeyAttribute : Attribute
         ReferenceType = referenceType;
         ReferencePrimaryKey = referencePrimaryKey;
     }
+
+
 }

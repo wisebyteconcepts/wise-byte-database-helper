@@ -12,7 +12,10 @@ namespace WiseByteDatabaseHelper.Tests
     public class Customer
     {
         [PrimaryKey, AutoIncrement]
+        [Column("CustomerId")]
         public int Id { get; set; }
+
+        [Column("CustomerName")]
         public string Name { get; set; }
     }
 
@@ -22,8 +25,9 @@ namespace WiseByteDatabaseHelper.Tests
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        [ForeignKey(typeof(Customer), "Id")]
+        [ForeignKey(typeof(Customer), nameof(Customer.Id))]
         public int CustomerId { get; set; }
+
     }
 
     public class TestDbContext : DatabaseContext
@@ -101,7 +105,7 @@ namespace WiseByteDatabaseHelper.Tests
                     var from = reader["from"].ToString();          // "CustomerId"
                     var to = reader["to"].ToString();              // "Id"
 
-                    if (table == "Customers" && from == "CustomerId" && to == "Id")
+                    if (table == "Customers" && from == "CustomerId" && to == "CustomerId")
                         found = true;
                 }
 
