@@ -37,7 +37,8 @@ public static class SchemaBuilder
                 Name = columnName,
                 Type = prop.PropertyType,
                 IsPrimaryKey = ReflectionHelper.IsPrimaryKey(prop),
-                AutoIncrement = ReflectionHelper.IsAutoIncrement(prop)
+                AutoIncrement = ReflectionHelper.IsAutoIncrement(prop),
+                IsNull = ReflectionHelper.IsNotNull(prop),
             });
 
             // Foreign key gets added to foreign key list
@@ -54,7 +55,4 @@ public static class SchemaBuilder
 
         return table;
     }
-
-
-
 }

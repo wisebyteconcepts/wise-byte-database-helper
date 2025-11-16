@@ -8,14 +8,16 @@ public class ColumnDefinition
     public Type Type { get; set; }
     public bool IsPrimaryKey { get; set; }
     public bool AutoIncrement { get; set; }
+    public bool IsNull { get; set; }
 
     public string ToSql(IDialect dialect)
     {
-        var typeSql = dialect.TypeToSql(Type, IsPrimaryKey, AutoIncrement);
+        var typeSql = dialect.TypeToSql(Type, IsPrimaryKey, AutoIncrement, IsNull);
 
         var pk = IsPrimaryKey ? " PRIMARY KEY" : "";
         var ai = AutoIncrement ? " AUTOINCREMENT" : "";
+        var nn = !IsNull ? " NOT NULL" : "";
 
-        return $"{Name} {typeSql}{pk}{ai}";
+        return $"{Name} {typeSql}{nn}{pk}{ai}";
     }
 }

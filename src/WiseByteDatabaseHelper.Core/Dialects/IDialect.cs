@@ -6,5 +6,5 @@ public interface IDialect
 {
     string GenerateCreateTableSql(TableDefinition table);
     string GenerateAlterTableAddColumnSql(string table, ColumnDefinition column);
-    string TypeToSql(Type type, bool isPrimaryKey, bool autoIncrement);
+    string TypeToSql(Type type, bool isPrimaryKey, bool autoIncrement, bool nonNull);
 }

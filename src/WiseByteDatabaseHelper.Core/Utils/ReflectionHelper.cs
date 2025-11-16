@@ -58,5 +58,13 @@ public static class ReflectionHelper
                    $"Property '{fkAttr.ReferencePrimaryKey}' not found in '{fkAttr.ReferenceType.Name}'.");
     }
 
+    internal static bool IsNotNull(PropertyInfo prop)
+    {
+        var context = new NullabilityInfoContext();
+        var nullability = context.Create(prop);
 
+        return nullability.WriteState == NullabilityState.Nullable
+            || nullability.ReadState == NullabilityState.Nullable;
+
+    }
 }

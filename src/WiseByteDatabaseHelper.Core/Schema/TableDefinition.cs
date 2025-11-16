@@ -6,4 +6,6 @@ public class TableDefinition
     public Type ClrType { get; set; }
     public List<ColumnDefinition> Columns { get; set; } = new();
     public List<ForeignKeyDefinition> ForeignKeys { get; set; } = new();
+
+
 }

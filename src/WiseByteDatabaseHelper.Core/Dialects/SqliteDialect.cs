@@ -4,7 +4,7 @@ namespace WiseByteDatabaseHelper.Core.Dialects;
 
 public class SqliteDialect : IDialect
 {
-    public string TypeToSql(Type type, bool isPrimaryKey, bool autoIncrement)
+    public string TypeToSql(Type type, bool isPrimaryKey, bool autoIncrement, bool notNull)
     {
         if (isPrimaryKey && autoIncrement)
             return "INTEGER";
