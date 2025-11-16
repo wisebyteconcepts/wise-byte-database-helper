@@ -9,11 +9,30 @@ public class SqliteDialect : IDialect
         if (isPrimaryKey && autoIncrement)
             return "INTEGER";
 
+        // Nullable<T> unwrap
+        var underlying = Nullable.GetUnderlyingType(type);
+        if (underlying != null) type = underlying;
+
         if (type == typeof(int)) return "INTEGER";
         if (type == typeof(long)) return "INTEGER";
-        if (type == typeof(string)) return "TEXT";
+        if (type == typeof(short)) return "INTEGER";
+        if (type == typeof(byte)) return "INTEGER";
         if (type == typeof(bool)) return "INTEGER";
-        if (type == typeof(DateTime)) return "TEXT";
+        if (type == typeof(char)) return "INTEGER";
+
+        if (type.IsEnum) return "INTEGER";
+
+        if (type == typeof(float)) return "REAL";
+        if (type == typeof(double)) return "REAL";
+        if (type == typeof(decimal)) return "REAL"; // or TEXT for precision
+
+        if (type == typeof(string)) return "TEXT";
+        if (type == typeof(Guid)) return "TEXT";
+        if (type == typeof(DateTime)) return "TEXT"; // recommended: ISO8601
+        if (type == typeof(DateTimeOffset)) return "TEXT";
+        if (type == typeof(TimeSpan)) return "TEXT";
+
+        if (type == typeof(byte[])) return "BLOB";
 
         throw new NotSupportedException($"Unsupported type: {type}");
     }
